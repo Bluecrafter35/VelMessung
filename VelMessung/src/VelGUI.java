@@ -17,6 +17,7 @@ public class VelGUI extends javax.swing.JFrame
 {
 
     VelModel model = new VelModel();
+    
     /**
      * Creates new form VelGUI
      */
@@ -24,7 +25,9 @@ public class VelGUI extends javax.swing.JFrame
     {
         initComponents();
         this.jtTable.setModel(model);
-        model.add(new VeloCity(LocalDate.now(), LocalTime.now(), "LB-Deichsel", 120, 110));
+        this.jtTable.setDefaultRenderer(Object.class, new VelTableCellRenderer());
+        //model.add(new VeloCity(LocalDate.now(), LocalTime.now(), "LB-Deichsel", 120, 110));
+        
     }
 
     /**

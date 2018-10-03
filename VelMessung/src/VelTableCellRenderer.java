@@ -31,6 +31,16 @@ public class VelTableCellRenderer implements TableCellRenderer
             label.setForeground(Color.black);
             label.setText(o.toString());
         }
+        
+        if(isSelected)
+        {
+            label.setBackground(Color.LIGHT_GRAY);
+        }
+        
+        
+        c=label;
+        
+        return c;
     }
     
 }
