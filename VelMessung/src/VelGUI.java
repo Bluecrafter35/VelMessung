@@ -26,7 +26,7 @@ public class VelGUI extends javax.swing.JFrame
         initComponents();
         this.jtTable.setModel(model);
         this.jtTable.setDefaultRenderer(Object.class, new VelTableCellRenderer());
-        //model.add(new VeloCity(LocalDate.now(), LocalTime.now(), "LB-Deichsel", 120, 110));
+        model.add(new VeloCity(LocalDate.now(), LocalTime.now(), "LB-Deichsel", 120, 110));
         
     }
 
