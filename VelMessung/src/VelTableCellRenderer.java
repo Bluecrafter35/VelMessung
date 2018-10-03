@@ -44,12 +44,12 @@ public class VelTableCellRenderer implements TableCellRenderer
                 label.setBackground(Color.BLUE);
                 label.setForeground(Color.WHITE);
             }
-            else if(i<20)
+            else if(i<=20)
             {
                 label.setBackground(Color.YELLOW);
                 label.setForeground(Color.BLACK);
             }
-            else if(i<30)
+            else if(i<=30)
             {
                 label.setBackground(Color.ORANGE);
                 label.setForeground(Color.BLACK);

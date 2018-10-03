@@ -26,7 +26,7 @@ public class VelGUI extends javax.swing.JFrame
         initComponents();
         this.jtTable.setModel(model);
         this.jtTable.setDefaultRenderer(Object.class, new VelTableCellRenderer());
-        model.add(new VeloCity(LocalDate.now(), LocalTime.now(), "LB-Deichsel", 120, 110));
+        //model.add(new VeloCity(LocalDate.now(), LocalTime.now(), "LB-Deichsel", 120, 10));
         
     }
 
@@ -40,8 +40,12 @@ public class VelGUI extends javax.swing.JFrame
     private void initComponents()
     {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTable = new javax.swing.JTable();
+        lbMessungen = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jmDatei = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,21 +62,34 @@ public class VelGUI extends javax.swing.JFrame
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtTable.setComponentPopupMenu(jPopupMenu1);
         jScrollPane1.setViewportView(jtTable);
+
+        lbMessungen.setText("MESSUNGEN");
+
+        jmDatei.setText("Datei");
+        jMenuBar1.add(jmDatei);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbMessungen, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbMessungen, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -119,7 +136,11 @@ public class VelGUI extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenu jmDatei;
     private javax.swing.JTable jtTable;
+    private javax.swing.JLabel lbMessungen;
     // End of variables declaration//GEN-END:variables
 }
