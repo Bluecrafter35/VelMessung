@@ -3,6 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import javax.swing.table.AbstractTableModel;
 
 /*
@@ -22,7 +23,7 @@ public class VelModel extends AbstractTableModel
     private ArrayList<VeloCity> messwerte = new ArrayList<>();
     private VeloCity leer = new VeloCity();
     
-    private Map<String, ArrayList<VeloCity> > map = new HashMap<>();
+    private Map<String, ArrayList<Integer> > map = new HashMap<>();
     
     public void add(VeloCity vc)
     {
@@ -31,8 +32,10 @@ public class VelModel extends AbstractTableModel
             messwerte.remove(messwerte.get(0));
         }
         messwerte.add(vc);
+        fillMap();
         fireTableRowsInserted(messwerte.size()-1, messwerte.size()-1);
     }
+    
     public void delete(int i)
     {
         if(messwerte.size()>=1&&messwerte.get(0).getDatum()==null)
@@ -40,6 +43,7 @@ public class VelModel extends AbstractTableModel
             return;
         }
         messwerte.remove(i);
+        fillMap();
         fireTableRowsDeleted(i, i);
         if(messwerte.size()==0)
         {
@@ -49,14 +53,39 @@ public class VelModel extends AbstractTableModel
     
     public void fillMap()
     {
+        map.clear();
         for(VeloCity vc : messwerte)
         {
             if(!map.containsKey(vc.getKennzeichen()))
             {
                 map.put(vc.getKennzeichen(), new ArrayList<>());
             }
-            
+            map.get(vc.getKennzeichen()).add(vc.getÜbertreten());
         }
+    }
+    
+    public Map<String,Double> calculateAvg()
+    {
+        Map<String,Double> results = new HashMap<>();
+        Set<String> keys = map.keySet();
+        double sum =0;
+        for(String key: keys)
+        {
+            ArrayList<Integer> ints = map.get(key);
+            for(int zahl: ints)
+            {
+                sum+=zahl;
+            }
+            sum/=ints.size();
+            try{
+                results.put(key, sum);
+                
+            }catch(Exception ex)
+            {
+                ex.printStackTrace();
+            }
+        }
+        return results;
     }
     
     @Override

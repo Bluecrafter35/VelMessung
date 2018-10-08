@@ -3,7 +3,6 @@ import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
 /*
@@ -38,7 +37,7 @@ public class VelTableCellRenderer implements TableCellRenderer
             label.setText(o+"");
             label.setHorizontalAlignment((int) jtable.CENTER_ALIGNMENT);
             
-            int i = (Integer)o;
+            double i = (Integer)o;
             if(i==0)
             {
                 label.setText("Keine Übertretung");
@@ -77,7 +76,6 @@ public class VelTableCellRenderer implements TableCellRenderer
         {
             label.setBackground(new Color(130,200,240,123));
         }
-        
         
         c=label;
         

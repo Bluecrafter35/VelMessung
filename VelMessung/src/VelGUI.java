@@ -2,6 +2,8 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 
 /*
@@ -136,7 +138,7 @@ public class VelGUI extends javax.swing.JFrame
 
     private void jmiAddActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiAddActionPerformed
     {//GEN-HEADEREND:event_jmiAddActionPerformed
-        Veldialog dialog = new Veldialog(this, true);
+        VelDialog dialog = new VelDialog(this, true);
         dialog.setVisible(true);
         if(dialog.isOk())
         {
@@ -155,7 +157,11 @@ public class VelGUI extends javax.swing.JFrame
 
     private void jmiDurchschnittActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiDurchschnittActionPerformed
     {//GEN-HEADEREND:event_jmiDurchschnittActionPerformed
-        // TODO add your handling code here:
+        Map<String, Double> rs = model.calculateAvg();
+        for(String key:rs.keySet())
+        {
+            JOptionPane.showMessageDialog(null, String.format("Der Lenker mit dem Kennzeichen: %s, war im Durchschnitt um: %.2f km/h zu schnell", key, rs.get(key)));
+        }
     }//GEN-LAST:event_jmiDurchschnittActionPerformed
 
     /**

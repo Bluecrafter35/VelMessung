@@ -1,4 +1,5 @@
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -12,7 +13,7 @@ import java.time.LocalTime;
  *
  * @author Christoph Mautner
  */
-public class VeloCity
+public class VeloCity implements Serializable
 {
     private LocalDate datum;
     private LocalTime uhrzeit;
