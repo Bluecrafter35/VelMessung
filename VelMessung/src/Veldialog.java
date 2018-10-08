@@ -98,6 +98,13 @@ public class Veldialog extends javax.swing.JDialog
         });
 
         btCancel.setText("Abbrechen");
+        btCancel.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -174,6 +181,12 @@ public class Veldialog extends javax.swing.JDialog
             ex.printStackTrace();
         }
     }//GEN-LAST:event_btUebernehmenActionPerformed
+
+    private void btCancelActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btCancelActionPerformed
+    {//GEN-HEADEREND:event_btCancelActionPerformed
+        ok = false;
+        this.dispose();
+    }//GEN-LAST:event_btCancelActionPerformed
 
     /**
      * @param args the command line arguments

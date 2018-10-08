@@ -44,6 +44,7 @@ public class VelGUI extends javax.swing.JFrame
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jmiAdd = new javax.swing.JMenuItem();
+        jmiDelete = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTable = new javax.swing.JTable();
         lbMessungen = new javax.swing.JLabel();
@@ -59,6 +60,16 @@ public class VelGUI extends javax.swing.JFrame
             }
         });
         jPopupMenu1.add(jmiAdd);
+
+        jmiDelete.setText("Löschen");
+        jmiDelete.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmiDeleteActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jmiDelete);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,6 +131,15 @@ public class VelGUI extends javax.swing.JFrame
         }
     }//GEN-LAST:event_jmiAddActionPerformed
 
+    private void jmiDeleteActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiDeleteActionPerformed
+    {//GEN-HEADEREND:event_jmiDeleteActionPerformed
+        int[] indices = this.jtTable.getSelectedRows();
+        for(int i = 0; i<indices.length;i++)
+        {
+            model.delete(indices[i]);
+        }
+    }//GEN-LAST:event_jmiDeleteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -164,6 +184,7 @@ public class VelGUI extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenu jmDatei;
     private javax.swing.JMenuItem jmiAdd;
+    private javax.swing.JMenuItem jmiDelete;
     private javax.swing.JTable jtTable;
     private javax.swing.JLabel lbMessungen;
     // End of variables declaration//GEN-END:variables

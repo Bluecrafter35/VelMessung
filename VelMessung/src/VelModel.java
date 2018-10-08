@@ -18,6 +18,7 @@ public class VelModel extends AbstractTableModel
     private final static String[] COLUMNNAMES = {"Datum","Uhrzeit","Kennzeichen","Gemessen","Erlaubt","Übertretung"};
     
     private ArrayList<VeloCity> messwerte = new ArrayList<>();
+    private VeloCity leer = new VeloCity();
     
     public void add(VeloCity vc)
     {
@@ -27,6 +28,19 @@ public class VelModel extends AbstractTableModel
         }
         messwerte.add(vc);
         fireTableRowsInserted(messwerte.size()-1, messwerte.size()-1);
+    }
+    public void delete(int i)
+    {
+        if(messwerte.size()>=1&&messwerte.get(0).getDatum()==null)
+        {
+            return;
+        }
+        messwerte.remove(i);
+        fireTableRowsDeleted(i, i);
+        if(messwerte.size()==0)
+        {
+            messwerte.add(leer);
+        }
     }
     
     @Override
