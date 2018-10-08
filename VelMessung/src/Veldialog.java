@@ -1,3 +1,8 @@
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,7 +15,9 @@
  */
 public class Veldialog extends javax.swing.JDialog
 {
-
+    private boolean ok =false;
+    private VeloCity vc ;
+    
     /**
      * Creates new form Veldialog
      */
@@ -18,6 +25,17 @@ public class Veldialog extends javax.swing.JDialog
     {
         super(parent, modal);
         initComponents();
+    }
+
+    public VeloCity getVc()
+    {
+        return vc;
+    }
+
+    
+    public boolean isOk()
+    {
+        return ok;
     }
 
     /**
@@ -30,21 +48,132 @@ public class Veldialog extends javax.swing.JDialog
     private void initComponents()
     {
 
+        lbDatum = new javax.swing.JLabel();
+        tfDatum = new javax.swing.JTextField();
+        lbUhrzeit = new javax.swing.JLabel();
+        tfUhrzeit = new javax.swing.JTextField();
+        tfKennzeichen = new javax.swing.JTextField();
+        lbGemessen = new javax.swing.JLabel();
+        tfGemessen = new javax.swing.JTextField();
+        lbKennzeichen = new javax.swing.JLabel();
+        lbErlaubt = new javax.swing.JLabel();
+        tfErlaubt = new javax.swing.JTextField();
+        btUebernehmen = new javax.swing.JButton();
+        btCancel = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        lbDatum.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbDatum.setText("Datum:");
+
+        tfDatum.setText("09.12.2002");
+
+        lbUhrzeit.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbUhrzeit.setText("Uhrzeit:");
+
+        tfUhrzeit.setText("13:04");
+
+        tfKennzeichen.setText("LB-BLUE3");
+
+        lbGemessen.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbGemessen.setText("V-Gemessen:");
+
+        tfGemessen.setText("110");
+
+        lbKennzeichen.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbKennzeichen.setText("Kennzeichen:");
+
+        lbErlaubt.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbErlaubt.setText("V-Erlaubt:");
+
+        tfErlaubt.setText("105");
+
+        btUebernehmen.setText("Übernehmen");
+        btUebernehmen.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btUebernehmenActionPerformed(evt);
+            }
+        });
+
+        btCancel.setText("Abbrechen");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lbUhrzeit, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(lbDatum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfDatum)
+                            .addComponent(tfUhrzeit)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btUebernehmen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbErlaubt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbGemessen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbKennzeichen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfKennzeichen, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                            .addComponent(tfGemessen)
+                            .addComponent(tfErlaubt)
+                            .addComponent(btCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbUhrzeit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfUhrzeit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbKennzeichen, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfKennzeichen, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbGemessen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfGemessen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbErlaubt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfErlaubt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btUebernehmen, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(btCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btUebernehmenActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btUebernehmenActionPerformed
+    {//GEN-HEADEREND:event_btUebernehmenActionPerformed
+        try{
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            DateTimeFormatter uhr = DateTimeFormatter.ofPattern("HH:mm");
+            vc = new VeloCity(LocalDate.parse(this.tfDatum.getText(), dtf), LocalTime.parse(this.tfUhrzeit.getText(), uhr), this.tfKennzeichen.getText(), Integer.parseInt(this.tfGemessen.getText()), Integer.parseInt(this.tfErlaubt.getText()));
+            ok =true;
+            this.dispose();
+        }catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btUebernehmenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -94,5 +223,17 @@ public class Veldialog extends javax.swing.JDialog
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btCancel;
+    private javax.swing.JButton btUebernehmen;
+    private javax.swing.JLabel lbDatum;
+    private javax.swing.JLabel lbErlaubt;
+    private javax.swing.JLabel lbGemessen;
+    private javax.swing.JLabel lbKennzeichen;
+    private javax.swing.JLabel lbUhrzeit;
+    private javax.swing.JTextField tfDatum;
+    private javax.swing.JTextField tfErlaubt;
+    private javax.swing.JTextField tfGemessen;
+    private javax.swing.JTextField tfKennzeichen;
+    private javax.swing.JTextField tfUhrzeit;
     // End of variables declaration//GEN-END:variables
 }

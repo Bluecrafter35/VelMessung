@@ -112,7 +112,12 @@ public class VelGUI extends javax.swing.JFrame
 
     private void jmiAddActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiAddActionPerformed
     {//GEN-HEADEREND:event_jmiAddActionPerformed
-        // TODO add your handling code here:
+        Veldialog dialog = new Veldialog(this, true);
+        dialog.setVisible(true);
+        if(dialog.isOk())
+        {
+            model.add(dialog.getVc());
+        }
     }//GEN-LAST:event_jmiAddActionPerformed
 
     /**

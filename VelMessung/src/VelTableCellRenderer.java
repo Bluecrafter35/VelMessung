@@ -70,7 +70,7 @@ public class VelTableCellRenderer implements TableCellRenderer
         
         if(isSelected&&o instanceof Integer==false)
         {
-            label.setBackground(Color.LIGHT_GRAY);
+            label.setBackground(new Color(130,200,240,123));
         }
         
         
