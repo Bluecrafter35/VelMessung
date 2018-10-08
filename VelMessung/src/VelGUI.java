@@ -1,9 +1,15 @@
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableModel;
 
 /*
@@ -54,13 +60,15 @@ public class VelGUI extends javax.swing.JFrame
         lbMessungen = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmDatei = new javax.swing.JMenu();
+        jmiLaden = new javax.swing.JMenuItem();
+        jmiSpeichern = new javax.swing.JMenuItem();
 
         jmiAdd.setText("Hinzufügen");
         jmiAdd.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jmiAddActionPerformed(evt);
+                onAddMeasure(evt);
             }
         });
         jPopupMenu1.add(jmiAdd);
@@ -70,18 +78,18 @@ public class VelGUI extends javax.swing.JFrame
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jmiDeleteActionPerformed(evt);
+                onRemoveMeasure(evt);
             }
         });
         jPopupMenu1.add(jmiDelete);
         jPopupMenu1.add(jSeparator1);
 
-        jmiDurchschnitt.setText("jMenuItem1");
+        jmiDurchschnitt.setText("Durchschnitt");
         jmiDurchschnitt.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jmiDurchschnittActionPerformed(evt);
+                onDisplayAvg(evt);
             }
         });
         jPopupMenu1.add(jmiDurchschnitt);
@@ -107,6 +115,29 @@ public class VelGUI extends javax.swing.JFrame
         lbMessungen.setText("MESSUNGEN");
 
         jmDatei.setText("Datei");
+
+        jmiLaden.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        jmiLaden.setText("Laden");
+        jmiLaden.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                onLoadData(evt);
+            }
+        });
+        jmDatei.add(jmiLaden);
+
+        jmiSpeichern.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        jmiSpeichern.setText("Speichern");
+        jmiSpeichern.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                onSaveData(evt);
+            }
+        });
+        jmDatei.add(jmiSpeichern);
+
         jMenuBar1.add(jmDatei);
 
         setJMenuBar(jMenuBar1);
@@ -136,33 +167,73 @@ public class VelGUI extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jmiAddActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiAddActionPerformed
-    {//GEN-HEADEREND:event_jmiAddActionPerformed
+    private void onAddMeasure(java.awt.event.ActionEvent evt)//GEN-FIRST:event_onAddMeasure
+    {//GEN-HEADEREND:event_onAddMeasure
         VelDialog dialog = new VelDialog(this, true);
         dialog.setVisible(true);
         if(dialog.isOk())
         {
             model.add(dialog.getVc());
         }
-    }//GEN-LAST:event_jmiAddActionPerformed
+    }//GEN-LAST:event_onAddMeasure
 
-    private void jmiDeleteActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiDeleteActionPerformed
-    {//GEN-HEADEREND:event_jmiDeleteActionPerformed
+    private void onRemoveMeasure(java.awt.event.ActionEvent evt)//GEN-FIRST:event_onRemoveMeasure
+    {//GEN-HEADEREND:event_onRemoveMeasure
         int[] indices = this.jtTable.getSelectedRows();
         for(int i = indices.length-1; i>=0;i--)
         {
             model.delete(indices[i]);
         }
-    }//GEN-LAST:event_jmiDeleteActionPerformed
+    }//GEN-LAST:event_onRemoveMeasure
 
-    private void jmiDurchschnittActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiDurchschnittActionPerformed
-    {//GEN-HEADEREND:event_jmiDurchschnittActionPerformed
+    private void onDisplayAvg(java.awt.event.ActionEvent evt)//GEN-FIRST:event_onDisplayAvg
+    {//GEN-HEADEREND:event_onDisplayAvg
         Map<String, Double> rs = model.calculateAvg();
         for(String key:rs.keySet())
         {
             JOptionPane.showMessageDialog(null, String.format("Der Lenker mit dem Kennzeichen: %s, war im Durchschnitt um: %.2f km/h zu schnell", key, rs.get(key)));
         }
-    }//GEN-LAST:event_jmiDurchschnittActionPerformed
+    }//GEN-LAST:event_onDisplayAvg
+
+    private void onLoadData(java.awt.event.ActionEvent evt)//GEN-FIRST:event_onLoadData
+    {//GEN-HEADEREND:event_onLoadData
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".ser", "ser");
+        fileChooser.addChoosableFileFilter(filter);
+        int ret=fileChooser.showOpenDialog(null);
+        if(ret == fileChooser.APPROVE_OPTION)
+        {
+            File f = fileChooser.getSelectedFile();
+            try {
+
+                model.load(f);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
+        }
+    }//GEN-LAST:event_onLoadData
+
+    private void onSaveData(java.awt.event.ActionEvent evt)//GEN-FIRST:event_onSaveData
+    {//GEN-HEADEREND:event_onSaveData
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".ser", "ser");
+        fileChooser.addChoosableFileFilter(filter);
+        int ret=fileChooser.showSaveDialog(null);
+        if(ret==fileChooser.APPROVE_OPTION)
+        {
+            File f = fileChooser.getSelectedFile();
+            try {
+
+                model.save(f);
+            } catch (IOException ex) {
+                Logger.getLogger(VelGUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
+        }
+    }//GEN-LAST:event_onSaveData
 
     /**
      * @param args the command line arguments
@@ -211,6 +282,8 @@ public class VelGUI extends javax.swing.JFrame
     private javax.swing.JMenuItem jmiAdd;
     private javax.swing.JMenuItem jmiDelete;
     private javax.swing.JMenuItem jmiDurchschnitt;
+    private javax.swing.JMenuItem jmiLaden;
+    private javax.swing.JMenuItem jmiSpeichern;
     private javax.swing.JTable jtTable;
     private javax.swing.JLabel lbMessungen;
     // End of variables declaration//GEN-END:variables

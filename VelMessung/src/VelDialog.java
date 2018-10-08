@@ -25,6 +25,10 @@ public class VelDialog extends javax.swing.JDialog
     {
         super(parent, modal);
         initComponents();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        DateTimeFormatter uhr = DateTimeFormatter.ofPattern("HH:mm");
+        this.tfDatum.setText(LocalDate.now().format(dtf));
+        this.tfUhrzeit.setText(LocalTime.now().format(uhr));
     }
 
     public VeloCity getVc()

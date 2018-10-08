@@ -1,4 +1,10 @@
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -86,6 +92,35 @@ public class VelModel extends AbstractTableModel
             }
         }
         return results;
+    }
+    
+    public void save(File f) throws IOException, Exception
+    {
+        if(messwerte.size()==0||messwerte.get(0).getDatum()==null)
+        {
+            throw new Exception("Bitte zuerst etwas in den Table schreiben!");
+        }
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
+        for(VeloCity vc: messwerte)
+        {
+            oos.writeObject(vc);
+        }
+        oos.flush();
+    }
+    public void load(File f) throws Exception
+    {
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+        Object vc = null;
+        while((vc=ois.readObject())!=null)
+        {
+            
+            try{
+                add((VeloCity)vc);
+            }catch(Exception ex)
+            {
+                ex.printStackTrace();
+            }
+        }
     }
     
     @Override
