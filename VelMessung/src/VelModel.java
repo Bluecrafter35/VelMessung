@@ -72,7 +72,6 @@ public class VelModel extends AbstractTableModel
         if(vc.getKennzeichen()==null)return null;
         if(vc.getGemessen()==0)return null;
         if(vc.getErlaubt()==0)return null;
-        if(vc.getÜbertreten()==0)return null;
         switch(columnindex)
         {
             case 0: return vc.getDatum().format(dtf);

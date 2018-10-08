@@ -134,7 +134,7 @@ public class VelGUI extends javax.swing.JFrame
     private void jmiDeleteActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiDeleteActionPerformed
     {//GEN-HEADEREND:event_jmiDeleteActionPerformed
         int[] indices = this.jtTable.getSelectedRows();
-        for(int i = 0; i<indices.length;i++)
+        for(int i = indices.length-1; i>=0;i--)
         {
             model.delete(indices[i]);
         }
