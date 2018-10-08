@@ -20,7 +20,7 @@ public class VeloCity
     private int gemessen;
     private int erlaubt;
     private int übertreten;
-
+    
     public VeloCity(LocalDate datum, LocalTime uhrzeit, String kennzeichen, int gemessen, int erlaubt)
     {
         this.datum = datum;
@@ -30,6 +30,17 @@ public class VeloCity
         this.erlaubt = erlaubt;
         this.übertreten = gemessen-erlaubt <0 ? 0:gemessen-erlaubt;
     }
+
+    public VeloCity()
+    {
+        this.datum=null;
+        this.uhrzeit=null;
+        this.kennzeichen=null;
+        this.gemessen=0;
+        this.erlaubt=0;
+        this.übertreten=0;
+    }
+    
 
     public LocalDate getDatum()
     {

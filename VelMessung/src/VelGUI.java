@@ -1,6 +1,7 @@
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
 import javax.swing.table.TableModel;
 
 /*
@@ -26,6 +27,7 @@ public class VelGUI extends javax.swing.JFrame
         initComponents();
         this.jtTable.setModel(model);
         this.jtTable.setDefaultRenderer(Object.class, new VelTableCellRenderer());
+        model.add(new VeloCity());
         //model.add(new VeloCity(LocalDate.now(), LocalTime.now(), "LB-Deichsel", 120, 10));
         
     }
@@ -41,11 +43,22 @@ public class VelGUI extends javax.swing.JFrame
     {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
+        jmiAdd = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTable = new javax.swing.JTable();
         lbMessungen = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmDatei = new javax.swing.JMenu();
+
+        jmiAdd.setText("Hinzufügen");
+        jmiAdd.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmiAddActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jmiAdd);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,6 +110,11 @@ public class VelGUI extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jmiAddActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiAddActionPerformed
+    {//GEN-HEADEREND:event_jmiAddActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmiAddActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -140,6 +158,7 @@ public class VelGUI extends javax.swing.JFrame
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenu jmDatei;
+    private javax.swing.JMenuItem jmiAdd;
     private javax.swing.JTable jtTable;
     private javax.swing.JLabel lbMessungen;
     // End of variables declaration//GEN-END:variables

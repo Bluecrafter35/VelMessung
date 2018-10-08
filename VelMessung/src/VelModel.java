@@ -21,6 +21,10 @@ public class VelModel extends AbstractTableModel
     
     public void add(VeloCity vc)
     {
+        if(messwerte.size()>=1&&messwerte.get(0).getDatum()==null)
+        {
+            messwerte.remove(messwerte.get(0));
+        }
         messwerte.add(vc);
         fireTableRowsInserted(messwerte.size()-1, messwerte.size()-1);
     }
@@ -49,6 +53,12 @@ public class VelModel extends AbstractTableModel
         VeloCity vc = messwerte.get(rowindex);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         DateTimeFormatter uhr = DateTimeFormatter.ofPattern("HH:mm");
+        if(vc.getDatum()==null)return null;
+        if(vc.getUhrzeit()==null)return null;
+        if(vc.getKennzeichen()==null)return null;
+        if(vc.getGemessen()==0)return null;
+        if(vc.getErlaubt()==0)return null;
+        if(vc.getÜbertreten()==0)return null;
         switch(columnindex)
         {
             case 0: return vc.getDatum().format(dtf);

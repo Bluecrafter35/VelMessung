@@ -60,8 +60,15 @@ public class VelTableCellRenderer implements TableCellRenderer
                 label.setForeground(Color.BLACK);
             }
         }
+        else if(o == null)
+        {
+            label.setOpaque(true);
+            label.setHorizontalAlignment((int)jtable.CENTER_ALIGNMENT);
+            label.setBackground(Color.WHITE);
+            label.setText("");
+        }
         
-        if(isSelected&& o instanceof String)
+        if(isSelected&&o instanceof Integer==false)
         {
             label.setBackground(Color.LIGHT_GRAY);
         }
