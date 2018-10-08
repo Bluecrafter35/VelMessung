@@ -45,6 +45,8 @@ public class VelGUI extends javax.swing.JFrame
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jmiAdd = new javax.swing.JMenuItem();
         jmiDelete = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jmiDurchschnitt = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTable = new javax.swing.JTable();
         lbMessungen = new javax.swing.JLabel();
@@ -70,6 +72,17 @@ public class VelGUI extends javax.swing.JFrame
             }
         });
         jPopupMenu1.add(jmiDelete);
+        jPopupMenu1.add(jSeparator1);
+
+        jmiDurchschnitt.setText("jMenuItem1");
+        jmiDurchschnitt.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmiDurchschnittActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jmiDurchschnitt);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,6 +153,11 @@ public class VelGUI extends javax.swing.JFrame
         }
     }//GEN-LAST:event_jmiDeleteActionPerformed
 
+    private void jmiDurchschnittActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiDurchschnittActionPerformed
+    {//GEN-HEADEREND:event_jmiDurchschnittActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmiDurchschnittActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -182,9 +200,11 @@ public class VelGUI extends javax.swing.JFrame
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu jmDatei;
     private javax.swing.JMenuItem jmiAdd;
     private javax.swing.JMenuItem jmiDelete;
+    private javax.swing.JMenuItem jmiDurchschnitt;
     private javax.swing.JTable jtTable;
     private javax.swing.JLabel lbMessungen;
     // End of variables declaration//GEN-END:variables

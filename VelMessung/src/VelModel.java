@@ -1,6 +1,8 @@
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.table.AbstractTableModel;
 
 /*
@@ -19,6 +21,8 @@ public class VelModel extends AbstractTableModel
     
     private ArrayList<VeloCity> messwerte = new ArrayList<>();
     private VeloCity leer = new VeloCity();
+    
+    private Map<String, ArrayList<VeloCity> > map = new HashMap<>();
     
     public void add(VeloCity vc)
     {
@@ -40,6 +44,18 @@ public class VelModel extends AbstractTableModel
         if(messwerte.size()==0)
         {
             messwerte.add(leer);
+        }
+    }
+    
+    public void fillMap()
+    {
+        for(VeloCity vc : messwerte)
+        {
+            if(!map.containsKey(vc.getKennzeichen()))
+            {
+                map.put(vc.getKennzeichen(), new ArrayList<>());
+            }
+            
         }
     }
     

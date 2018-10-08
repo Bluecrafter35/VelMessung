@@ -39,7 +39,12 @@ public class VelTableCellRenderer implements TableCellRenderer
             label.setHorizontalAlignment((int) jtable.CENTER_ALIGNMENT);
             
             int i = (Integer)o;
-            if(i <= 10)
+            if(i==0)
+            {
+                label.setText("Keine Übertretung");
+                label.setBackground(Color.GREEN);
+            }
+            else if(i <= 10)
             {
                 label.setBackground(Color.BLUE);
                 label.setForeground(Color.WHITE);
